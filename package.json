@@ -2,9 +2,9 @@
 	"name": "vscode-auto-tinypng",
 	"displayName": "auto-tinypng",
 	"description": "",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"engines": {
-		"vscode": "^1.62.0"
+		"vscode": "^1.25.0"
 	},
 	"categories": [
 		"Other"
