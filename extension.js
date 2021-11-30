@@ -32,7 +32,7 @@ function activate(context) {
         {
           location: vscode.ProgressLocation.Notification,
           title: "图片压缩中",
-          cancellable: true,
+          cancellable: false,
         },
         (progress, token) => {
           const tiny = new TinyPng(args.path, true, progress);
