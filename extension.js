@@ -37,7 +37,13 @@ function activate(context) {
         (progress, token) => {
           const tiny = new TinyPng(args.path, true, progress);
 
-          const p = tiny.compress();
+          const p = tiny.compress().then(() => {
+            vscode.window.showInformationMessage(
+              `图片压缩完毕: 成功: ${tiny.successCount}张, 成功率${
+                (tiny.successCount / tiny.config.files.length) * 100
+              }%`
+            );
+          });
           token.onCancellationRequested(() => {
             console.log("User canceled the long running operation");
             tiny.stop = true;
