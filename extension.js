@@ -35,9 +35,18 @@ function activate(context) {
           cancellable: false,
         },
         (progress, token) => {
-          const tiny = new TinyPng(args.path, true, progress);
+          const rcsoutput = vscode.window.createOutputChannel("auto-tinypng");
+          rcsoutput.show();
+          const tiny = new TinyPng(args.path, true, progress, rcsoutput);
 
           const p = tiny.compress().then(() => {
+            if (!tiny.config.files.length) {
+              vscode.window.showInformationMessage(
+                `此文件夹无符合条件的图片（大于20k，小于5MB），无需压缩`
+              );
+              return;
+            }
+
             vscode.window.showInformationMessage(
               `图片压缩完毕: 成功: ${tiny.successCount}张, 成功率${
                 (tiny.successCount / tiny.config.files.length) * 100
